@@ -1,0 +1,20 @@
+# Requirements for building documentation
+
+# Sphinx
+sphinx>=7.0.0
+sphinx-rtd-theme>=2.0.0
+sphinx-copybutton>=0.5.0
+sphinx-sitemap>=2.5.0
+
+# MyST parser for Markdown
+myst-parser>=2.0.0
+
+# C++ documentation
+breathe>=0.35.0
+exhale>=0.3.0
+
+# Doxygen (for generating XML)
+# Install via: apt install doxygen (Linux) or brew install doxygen (macOS)
+
+# Optional: Graphviz for diagrams
+# Install via: apt install graphviz (Linux) or brew install graphviz (macOS)

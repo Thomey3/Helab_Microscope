@@ -1,0 +1,80 @@
+# Doxyfile for Helab_Microscope
+# Generates XML for Sphinx/Breathe
+
+PROJECT_NAME           = "Helab Microscope"
+PROJECT_NUMBER         = 1.0.0
+PROJECT_BRIEF          = "Two-Photon Microscope Device Adapter for Micro-Manager"
+
+# Input
+INPUT                  = ../Device/include \
+                         ../Hub.h \
+                         ../Hub.cpp
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.cpp *.hpp
+
+# Output
+OUTPUT_DIRECTORY       = ./doxygen
+GENERATE_XML           = YES
+GENERATE_HTML          = NO
+GENERATE_LATEX         = NO
+
+# Extraction
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Source browsing
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+
+# Preprocessing
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = RESULT_VOID="Result<void>" \
+                         RESULT_DOUBLE="Result<double>" \
+                         RESULT_UINT32="Result<uint32_t>" \
+                         RESULT_VOID_PTR="Result<void*>" \
+                         PLATFORM_WINDOWS \
+                         PLATFORM_LINUX \
+                         USE_CUDA \
+                         USE_NI_DAQMX
+
+# Graphs
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+CLASS_DIAGRAMS         = YES
+UML_LOOK               = YES
+
+# Modern C++
+CPP_CLI_SUPPORT        = NO
+SUPPORT_OBJC_MP        = NO
+OPTIMIZE_OUTPUT_C      = NO
+OPTIMIZE_OUTPUT_JAVA   = NO
+OPTIMIZE_OUTPUT_FOR_C  = YES
+OPTIMIZE_OUTPUT_FOR_JAVA = NO
+
+# Formatting
+TAB_SIZE               = 4
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
+MULTILINE_CPP_IS_BRIEF = NO
+INHERIT_DOCS           = YES
+SEPARATE_MEMBER_PAGES  = NO
+
+# Sorting
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = YES
+SORT_MEMBERS_CTORS_1ST = YES
+SORT_GROUP_NAMES       = YES
+
+# Include path
+INCLUDE_PATH           = ../Device/include \
+                         ../Device/include/hal \
+                         ../Device/include/hal/impl \
+                         ../Device/include/app \
+                         ../Device/include/pipeline \
+                         ../Device/include/mmadapter \
+                         ../Device/include/common
