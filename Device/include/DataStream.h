@@ -17,29 +17,29 @@ struct DataBlock
 class BufferPool final
 {
 public:
-    // -------- Singleton Èë¿Ú ----------
+    // -------- Singleton å…¥å£ ----------
     static BufferPool& instance(size_t num_blocks = 0, size_t block_size = 0);
 
-    // -------- ¹¹Ôì/Îö¹¹ ------------------
+    // -------- æ„é€ /ææ„ ------------------
     BufferPool(size_t num_blocks, size_t block_size);
     ~BufferPool();
 
-    // -------- ºËĞÄÒµÎñ API ----------
+    // -------- æ ¸å¿ƒä¸šåŠ¡ API ----------
     DataBlock* get_writable_block();
     void       post_filled_block(DataBlock* blk);
     DataBlock* get_filled_block();
     void       release_block(DataBlock* blk);
 
-    // Ö÷¶¯¹Ø±Õ / ÖØÖÃ´óĞ¡
+    // ä¸»åŠ¨å…³é—­ / é‡ç½®å¤§å°
     bool reconfigure(size_t num_blocks, size_t block_size);
     void shutdown();
 
 private:
-    // ½ûÖ¹Íâ²¿¹¹Ôì / ¿½±´
+    // ç¦æ­¢å¤–éƒ¨æ„é€  / æ‹·è´
     BufferPool(const BufferPool&) = delete;
     BufferPool& operator=(const BufferPool&) = delete;
 
-    // ÄÚ²¿×ÊÔ´
+    // å†…éƒ¨èµ„æº
     std::atomic<bool>                 m_shutdown{ false };
     std::vector<std::unique_ptr<DataBlock>> m_all_blocks;
     std::queue<DataBlock*>            m_free_queue;

@@ -1,70 +1,70 @@
 #pragma once
 typedef enum ChannelMask {
-	// »ù´¡Í¨µÀ¶¨Òå (Î»±êÖ¾)
-	CH1 = 1 << 0,  // ÖµÎª 1 (¶ş½øÖÆ 0001)
-	CH2 = 1 << 1,  // ÖµÎª 2 (¶ş½øÖÆ 0010)
-	CH3 = 1 << 2,  // ÖµÎª 4 (¶ş½øÖÆ 0100)
-	CH4 = 1 << 3,  // ÖµÎª 8 (¶ş½øÖÆ 1000)
+	// åŸºç¡€é€šé“å®šä¹‰ (ä½æ ‡å¿—)
+	CH1 = 1 << 0,  // å€¼ä¸º 1 (äºŒè¿›åˆ¶ 0001)
+	CH2 = 1 << 1,  // å€¼ä¸º 2 (äºŒè¿›åˆ¶ 0010)
+	CH3 = 1 << 2,  // å€¼ä¸º 4 (äºŒè¿›åˆ¶ 0100)
+	CH4 = 1 << 3,  // å€¼ä¸º 8 (äºŒè¿›åˆ¶ 1000)
 
-	// Ë«Í¨µÀ×éºÏ
-	CH1_CH2 = CH1 | CH2,  // ÖµÎª 3
-	CH1_CH3 = CH1 | CH3,  // ÖµÎª 5
-	CH2_CH3 = CH2 | CH3,  // ÖµÎª 6 
-	CH1_CH4 = CH1 | CH4,  // ÖµÎª 9
-	CH2_CH4 = CH2 | CH4,  // ÖµÎª 10
-	CH3_CH4 = CH3 | CH4,  // ÖµÎª 12
+	// åŒé€šé“ç»„åˆ
+	CH1_CH2 = CH1 | CH2,  // å€¼ä¸º 3
+	CH1_CH3 = CH1 | CH3,  // å€¼ä¸º 5
+	CH2_CH3 = CH2 | CH3,  // å€¼ä¸º 6 
+	CH1_CH4 = CH1 | CH4,  // å€¼ä¸º 9
+	CH2_CH4 = CH2 | CH4,  // å€¼ä¸º 10
+	CH3_CH4 = CH3 | CH4,  // å€¼ä¸º 12
 
-	// ËÄÍ¨µÀ×éºÏ
-	CH_ALL = CH1 | CH2 | CH3 | CH4 // ÖµÎª 15
+	// å››é€šé“ç»„åˆ
+	CH_ALL = CH1 | CH2 | CH3 | CH4 // å€¼ä¸º 15
 } ChannelMask;
 
 typedef enum DMABlockNum {
-	one_Block = 1, // µ¥¿é
-	two_Blocks = 2, // Ë«¿é
+	one_Block = 1, // å•å—
+	two_Blocks = 2, // åŒå—
 } DMABlockNum;
 
 typedef enum ChannelNumber {
-	One_Channel = 1, // µ¥Í¨µÀ
-	Two_Channels = 2, // Ë«Í¨µÀ
-	Four_Channels = 4 // ËÄÍ¨µÀ
+	One_Channel = 1, // å•é€šé“
+	Two_Channels = 2, // åŒé€šé“
+	Four_Channels = 4 // å››é€šé“
 } ChannelNumber;
 
 typedef enum AcquisitionMode {
-	MODE_FINITE_SINGLE = 0, // ÓĞÏŞµãµ¥´Î²É¼¯
-	MODE_FINITE_MULTI = 1, // ÓĞÏŞµã¶à´Î²É¼¯
-	MODE_INFINITE_SINGLE = 2, // ÎŞÏŞµãµ¥´Î²É¼¯
-	MODE_INFINITE_MULTI = 3, // ÎŞÏŞµã¶à´Î²É¼¯
-	MODE_DDS_PLAY = 4, // DDS²¥·Å
-	MODE_FILE_PLAY = 5,  // Íâ²¿Êı¾İÎÄ¼ş²¥·Å
-	ACQUISITION_MODE_COUNT // ²É¼¯Ä£Ê½ÊıÁ¿
+	MODE_FINITE_SINGLE = 0, // æœ‰é™ç‚¹å•æ¬¡é‡‡é›†
+	MODE_FINITE_MULTI = 1, // æœ‰é™ç‚¹å¤šæ¬¡é‡‡é›†
+	MODE_INFINITE_SINGLE = 2, // æ— é™ç‚¹å•æ¬¡é‡‡é›†
+	MODE_INFINITE_MULTI = 3, // æ— é™ç‚¹å¤šæ¬¡é‡‡é›†
+	MODE_DDS_PLAY = 4, // DDSæ’­æ”¾
+	MODE_FILE_PLAY = 5,  // å¤–éƒ¨æ•°æ®æ–‡ä»¶æ’­æ”¾
+	ACQUISITION_MODE_COUNT // é‡‡é›†æ¨¡å¼æ•°é‡
 } AcquisitionMode;
 
 typedef enum DataType {
-	Raw_Data = 0, // Ô­Ê¼Êı¾İ
-	Accumulative_Number = 1, // ÀÛ¼ÓÊı
-	Decreasing_Number = 2, // µİ¼õÊı
-	Triangle_Wave = 3, // Èı½Ç²¨
-	Constant_Sequence_1 = 4, // ³£ÊıĞòÁĞ1£º¸ßÎ»0µÍÎ»1
-	Constant_Sequence_2 = 5,  // ³£ÊıĞòÁĞ2£º¸ßÎ»1µÍÎ»0
-	Reversal_Number = 6, // ·´×ªÊı,01½»Ìæ
+	Raw_Data = 0, // åŸå§‹æ•°æ®
+	Accumulative_Number = 1, // ç´¯åŠ æ•°
+	Decreasing_Number = 2, // é€’å‡æ•°
+	Triangle_Wave = 3, // ä¸‰è§’æ³¢
+	Constant_Sequence_1 = 4, // å¸¸æ•°åºåˆ—1ï¼šé«˜ä½0ä½ä½1
+	Constant_Sequence_2 = 5,  // å¸¸æ•°åºåˆ—2ï¼šé«˜ä½1ä½ä½0
+	Reversal_Number = 6, // åè½¬æ•°,01äº¤æ›¿
 	DATATYPE_COUNT
 } DataType;
 
 typedef enum ClockMode {
-	Internal_Reference_Clock = 0, // ÄÚ²Î¿¼Ê±ÖÓ
-	External_Sampling_Clock = 1, // Íâ²ÉÑùÊ±ÖÓ
-	External_Reference_Clock = 2, // Íâ²Î¿¼Ê±ÖÓ
+	Internal_Reference_Clock = 0, // å†…å‚è€ƒæ—¶é’Ÿ
+	External_Sampling_Clock = 1, // å¤–é‡‡æ ·æ—¶é’Ÿ
+	External_Reference_Clock = 2, // å¤–å‚è€ƒæ—¶é’Ÿ
 	CLOCK_MODE_COUNT
 } ClockMode;
 
 typedef enum TriggerMode {
-	TRIG_SOFTWARE = 0,		// Èí¼ş´¥·¢
-	TRIG_INTERNAL_PULSE = 1, // ÄÚ²¿Âö³å´¥·¢
-	TRIG_EXTERNAL_PULSE_RISING = 2, // Íâ²¿Âö³åÉÏÉıÑØ´¥·¢
-	TRIG_EXTERNAL_PULSE_FALLING = 3, // Íâ²¿Âö³åÏÂ½µÑØ´¥·¢
-	TRIG_CHANNEL_RISING = 4, // Í¨µÀÉÏÉıÑØ´¥·¢
-	TRIG_CHANNEL_FALLING = 5, // Í¨µÀÏÂ½µÑØ´¥·¢
-	TRIG_CHANNEL_BOTH_EDGES = 6, // Í¨µÀË«±ßÑØ´¥·¢
-	TRIG_EXTERNAL_PULSE_BOTH_EDGES = 7,  // Íâ²¿Âö³åË«±ßÑØ´¥·¢
+	TRIG_SOFTWARE = 0,		// è½¯ä»¶è§¦å‘
+	TRIG_INTERNAL_PULSE = 1, // å†…éƒ¨è„‰å†²è§¦å‘
+	TRIG_EXTERNAL_PULSE_RISING = 2, // å¤–éƒ¨è„‰å†²ä¸Šå‡æ²¿è§¦å‘
+	TRIG_EXTERNAL_PULSE_FALLING = 3, // å¤–éƒ¨è„‰å†²ä¸‹é™æ²¿è§¦å‘
+	TRIG_CHANNEL_RISING = 4, // é€šé“ä¸Šå‡æ²¿è§¦å‘
+	TRIG_CHANNEL_FALLING = 5, // é€šé“ä¸‹é™æ²¿è§¦å‘
+	TRIG_CHANNEL_BOTH_EDGES = 6, // é€šé“åŒè¾¹æ²¿è§¦å‘
+	TRIG_EXTERNAL_PULSE_BOTH_EDGES = 7,  // å¤–éƒ¨è„‰å†²åŒè¾¹æ²¿è§¦å‘
 	TRIGGER_MODE_COUNT
 } TriggerMode;

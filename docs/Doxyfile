@@ -5,6 +5,10 @@ PROJECT_NAME           = "Helab Microscope"
 PROJECT_NUMBER         = 1.0.0
 PROJECT_BRIEF          = "Two-Photon Microscope Device Adapter for Micro-Manager"
 
+# Encoding
+INPUT_ENCODING         = UTF-8
+OUTPUT_LANGUAGE        = English
+
 # Input
 INPUT                  = ../Device/include \
                          ../Hub.h \

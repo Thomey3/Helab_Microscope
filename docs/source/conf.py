@@ -30,7 +30,6 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'breathe',
-    'exhale',
     'myst_parser',
     'sphinx_copybutton',
 ]
@@ -78,27 +77,6 @@ breathe_projects = {
 }
 breathe_default_project = 'helab_microscope'
 breathe_default_members = ('members', 'undoc-members', 'protected-members', 'private-members')
-
-# -- Exhale configuration ----------------------------------------------------
-# https://exhale.readthedocs.io/
-
-exhale_args = {
-    'doxygenStripFromPath': '../../Device/include',
-    'containmentFolder': './api',
-    'rootFileName': 'api_reference.rst',
-    'rootFileTitle': 'API Reference',
-    'doxygenConfigFile': '../Doxyfile',
-    'createTreeView': True,
-    'exhaleExecutesDoxygen': True,
-    'exhaleUseDoxyfile': True,
-    'unabridgedOrphanKinds': {
-        'namespace': {'members', 'functions', 'classes', 'structs', 'enums', 'variables', 'defines'},
-        'class': {'members', 'functions', 'variables'},
-        'struct': {'members', 'functions', 'variables'},
-        'enum': {'values'},
-    },
-    'afterTitleDescription': '.. contents:: Table of Contents\n   :local:\n   :depth: 2\n',
-}
 
 # -- Intersphinx configuration -----------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html
