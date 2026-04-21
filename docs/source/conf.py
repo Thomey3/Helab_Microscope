@@ -83,7 +83,7 @@ breathe_default_members = ('members', 'undoc-members', 'protected-members', 'pri
 # https://exhale.readthedocs.io/
 
 exhale_args = {
-    'doxygenStripFromPath': '../Device/include',
+    'doxygenStripFromPath': '../../Device/include',
     'containmentFolder': './api',
     'rootFileName': 'api_reference.rst',
     'rootFileTitle': 'API Reference',
