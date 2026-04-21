@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    Helab_Microscope SDK Auto-Detection Property Sheet
+
+    This property sheet automatically detects installed SDKs:
+    - NI-DAQmx (from National Instruments driver installation)
+    - CUDA Toolkit (from NVIDIA installation)
+    - QT_Board SDK (from bundled 3rdparty directory)
+
+    No manual configuration required if drivers are installed!
+  -->
+
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+
+    <!-- Project root detection -->
+    <HelabProjectRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), 'Helab_Microscope.vcxproj'))</HelabProjectRoot>
+
+    <!-- 3rdparty directory (check multiple locations) -->
+    <Helab3rdParty Condition="Exists('$(HelabProjectRoot)\..\..\..\..\3rdparty')">$(HelabProjectRoot)\..\..\..\..\3rdparty</Helab3rdParty>
+    <Helab3rdParty Condition="Exists('$(HelabProjectRoot)\..\..\..\3rdparty')">$(HelabProjectRoot)\..\..\..\3rdparty</Helab3rdParty>
+    <Helab3rdParty Condition="Exists('$(HelabProjectRoot)\..\3rdparty')">$(HelabProjectRoot)\..\3rdparty</Helab3rdParty>
+
+    <!-- NI-DAQmx auto-detection -->
+    <NI_DAQmx_Include Condition="Exists('C:\Program Files (x86)\National Instruments\NI-DAQ\DAQmx ANSI C Dev\include')">C:\Program Files (x86)\National Instruments\NI-DAQ\DAQmx ANSI C Dev\include</NI_DAQmx_Include>
+    <NI_DAQmx_Include Condition="Exists('C:\Program Files\National Instruments\NI-DAQ\DAQmx ANSI C Dev\include')">C:\Program Files\National Instruments\NI-DAQ\DAQmx ANSI C Dev\include</NI_DAQmx_Include>
+    <NI_DAQmx_Include Condition="Exists('$(Helab3rdParty)\NationalInstruments\DAQmx\include')">$(Helab3rdParty)\NationalInstruments\DAQmx\include</NI_DAQmx_Include>
+
+    <NI_DAQmx_Lib Condition="Exists('C:\Program Files (x86)\National Instruments\NI-DAQ\DAQmx ANSI C Dev\lib\msvc')">C:\Program Files (x86)\National Instruments\NI-DAQ\DAQmx ANSI C Dev\lib\msvc</NI_DAQmx_Lib>
+    <NI_DAQmx_Lib Condition="Exists('C:\Program Files\National Instruments\NI-DAQ\DAQmx ANSI C Dev\lib\msvc')">C:\Program Files\National Instruments\NI-DAQ\DAQmx ANSI C Dev\lib\msvc</NI_DAQmx_Lib>
+    <NI_DAQmx_Lib Condition="Exists('$(Helab3rdParty)\NationalInstruments\DAQmx\lib')">$(Helab3rdParty)\NationalInstruments\DAQmx\lib</NI_DAQmx_Lib>
+    <NI_DAQmx_Lib Condition="Exists('$(Helab3rdParty)\NationalInstruments\DAQmx_9.2\lib64\msvc')">$(Helab3rdParty)\NationalInstruments\DAQmx_9.2\lib64\msvc</NI_DAQmx_Lib>
+
+    <!-- CUDA auto-detection -->
+    <CUDA_Toolkit_Dir Condition="Exists('C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6')">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6</CUDA_Toolkit_Dir>
+    <CUDA_Toolkit_Dir Condition="Exists('C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4')">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4</CUDA_Toolkit_Dir>
+    <CUDA_Toolkit_Dir Condition="Exists('C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2')">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2</CUDA_Toolkit_Dir>
+    <CUDA_Toolkit_Dir Condition="Exists('C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.0')">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.0</CUDA_Toolkit_Dir>
+    <CUDA_Toolkit_Dir Condition="Exists('C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8')">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8</CUDA_Toolkit_Dir>
+    <CUDA_Toolkit_Dir Condition="Exists('$(Helab3rdParty)\CUDA')">$(Helab3rdParty)\CUDA</CUDA_Toolkit_Dir>
+
+    <CUDA_Include Condition="'$(CUDA_Toolkit_Dir)' != ''">$(CUDA_Toolkit_Dir)\include</CUDA_Include>
+    <CUDA_Lib Condition="'$(CUDA_Toolkit_Dir)' != ''">$(CUDA_Toolkit_Dir)\lib\x64</CUDA_Lib>
+
+    <!-- QT_Board SDK (bundled or custom path) -->
+    <QT_Board_Include Condition="Exists('$(Helab3rdParty)\QT12136DC\include')">$(Helab3rdParty)\QT12136DC\include</QT_Board_Include>
+    <QT_Board_Lib Condition="Exists('$(Helab3rdParty)\QT12136DC\lib')">$(Helab3rdParty)\QT12136DC\lib</QT_Board_Lib>
+
+    <!-- Alpao SDK (optional) -->
+    <Alpao_Include Condition="Exists('$(Helab3rdParty)\Alpao\include')">$(Helab3rdParty)\Alpao\include</Alpao_Include>
+    <Alpao_Lib Condition="Exists('$(Helab3rdParty)\Alpao\lib')">$(Helab3rdParty)\Alpao\lib</Alpao_Lib>
+
+  </PropertyGroup>
+
+  <!-- Build configuration -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>
+        $(HelabProjectRoot)\Device\include;
+        $(NI_DAQmx_Include);
+        $(QT_Board_Include);
+        $(CUDA_Include);
+        $(Alpao_Include);
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>
+        USE_NI_DAQMX;
+        USE_CUDA;
+        %(PreprocessorDefinitions)
+      </PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>
+        $(NI_DAQmx_Lib);
+        $(QT_Board_Lib);
+        $(CUDA_Lib);
+        $(Alpao_Lib);
+        %(AdditionalLibraryDirectories)
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+        NIDAQmx.lib;
+        QT_Board.lib;
+        cudart.lib;
+        %(AdditionalDependencies)
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <!-- Status messages -->
+  <Target Name="HelabShowConfig" BeforeTargets="Build">
+    <Message Importance="High" Text="Helab_Microscope Configuration:" />
+    <Message Importance="High" Text="  Project Root: $(HelabProjectRoot)" />
+    <Message Importance="High" Text="  3rdparty: $(Helab3rdParty)" />
+    <Message Importance="High" Text="  NI-DAQmx Include: $(NI_DAQmx_Include)" />
+    <Message Importance="High" Text="  NI-DAQmx Lib: $(NI_DAQmx_Lib)" />
+    <Message Importance="High" Text="  CUDA Toolkit: $(CUDA_Toolkit_Dir)" />
+    <Message Importance="High" Text="  QT_Board Include: $(QT_Board_Include)" />
+    <Message Importance="High" Text="  QT_Board Lib: $(QT_Board_Lib)" />
+    <Warning Condition="'$(NI_DAQmx_Include)' == ''" Text="NI-DAQmx not found! Please install NI-DAQmx driver." />
+    <Warning Condition="'$(CUDA_Toolkit_Dir)' == ''" Text="CUDA Toolkit not found! Please install CUDA." />
+    <Warning Condition="'$(QT_Board_Include)' == ''" Text="QT_Board SDK not found! Please place it in 3rdparty/QT12136DC/" />
+  </Target>
+
+  <ItemGroup>
+    <BuildMacro Include="HelabProjectRoot">
+      <Value>$(HelabProjectRoot)</Value>
+    </BuildMacro>
+    <BuildMacro Include="Helab3rdParty">
+      <Value>$(Helab3rdParty)</Value>
+    </BuildMacro>
+    <BuildMacro Include="NI_DAQmx_Include">
+      <Value>$(NI_DAQmx_Include)</Value>
+    </BuildMacro>
+    <BuildMacro Include="NI_DAQmx_Lib">
+      <Value>$(NI_DAQmx_Lib)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CUDA_Toolkit_Dir">
+      <Value>$(CUDA_Toolkit_Dir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="QT_Board_Include">
+      <Value>$(QT_Board_Include)</Value>
+    </BuildMacro>
+    <BuildMacro Include="QT_Board_Lib">
+      <Value>$(QT_Board_Lib)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
